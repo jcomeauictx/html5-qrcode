@@ -173,6 +173,9 @@ export interface QrcodeResult {
      */
     decodedTextType?: DecodedTextType;
 
+    /** Raw bytes of the decoded QR code or bar code. */
+    rawBytes?: Uint8Array;
+
     /** Data class for QR code result used for debugging. */
     debugData?: QrcodeResultDebugData;
 }
