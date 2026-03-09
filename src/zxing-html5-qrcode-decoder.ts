@@ -108,9 +108,14 @@ export class ZXingHtml5QrcodeDecoder implements QrcodeDecoderAsync {
             = new ZXing.BinaryBitmap(
                 new ZXing.HybridBinarizer(luminanceSource));
         let result = zxingDecoder.decode(binaryBitmap);
+        const metadata = result.getResultMetadata();
+        // BYTE_SEGMENTS = 2 in ZXing's ResultMetadataType enum
+        const byteSegments = metadata ? metadata.get(2) : undefined;
         return {
             text: result.text,
-	    rawBytes: result.rawBytes, // added by jc@unternet.net
+	    // Modified 2026-03-10 by jc@unternet.net: expose byteSegments
+	    // from ZXing metadata instead of unusable rawBytes codewords
+	    byteSegments: byteSegments || undefined,
             format: QrcodeResultFormat.create(
                 this.toHtml5QrcodeSupportedFormats(result.format)),
                 debugData: this.createDebugData()

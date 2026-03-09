@@ -173,10 +173,14 @@ export interface QrcodeResult {
      */
     decodedTextType?: DecodedTextType;
 
-    /** Raw bytes of the decoded QR code or bar code.
-     * Added by jcclaw@clawd.unternet.net
+    /** Byte segments from BYTE-mode data in the QR code or bar code.
+     * Each element is a Uint8Array of raw payload bytes (no mode/count
+     * headers or padding). Sourced from ZXing's BYTE_SEGMENTS metadata.
+     *
+     * Modified 2026-03-10 by jc@unternet.net: replaced rawBytes (which
+     * contained unusable bit-packed codewords) with byteSegments.
     */
-    rawBytes?: Uint8Array;
+    byteSegments?: Uint8Array[];
 
     /** Data class for QR code result used for debugging. */
     debugData?: QrcodeResultDebugData;
