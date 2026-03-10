@@ -25,6 +25,9 @@
                 lastResult = decodedText;
                 // Handle on success condition with the decoded message.
                 console.log(`Scan result ${decodedText}`, decodedResult);
+		console.log({"as binary string": String.fromCharCode
+			     .apply(null, decodedResult.result.byteSegments[0])
+		});
 	        resultContainer.replaceChild(
 		    document.createTextNode(decodedResult.decodedText),
 		    resultContainer.firstChild
